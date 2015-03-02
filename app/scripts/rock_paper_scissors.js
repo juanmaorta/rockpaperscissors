@@ -1,4 +1,6 @@
-var RockPaperScissors = (function () {
+var RockPaperScissors;
+
+RockPaperScissors = (function ($) {
     'use strict';
 
     var _whoWins, _validate,
@@ -15,32 +17,38 @@ var RockPaperScissors = (function () {
     };
 
     _whoWins = function (option1, option2) {
-        var result,
-            index1 = choices.indexOf(option1),
+        var    index1 = choices.indexOf(option1),
             index2 = choices.indexOf(option2),
             numChoices = choices.length - 1;
 
         if (index1 === index2) {
+            $(document).trigger('score:draw');
             return 'x';
         }
 
         if (index1 === numChoices && index2 === 0) {
+            $(document).trigger('score:user1');
             return 1;
         }
 
         if (index1 === 0 && index2 === numChoices) {
+            $(document).trigger('score:user2');
             return 2;
         }
 
         if (index1 < index2) {
+            $(document).trigger('score:user1');
             return 1;
         }
 
         if (index1 > index2) {
+            $(document).trigger('score:user2');
             return 2;
         }
 
         /*
+        var result;
+
         if (index1 === 2 && index2 === 0) {
             return 1;
         }
@@ -95,6 +103,10 @@ var RockPaperScissors = (function () {
 
     return {
         whoWins: _whoWins,
-        validate: _validate
+        validate: _validate,
+        getChoices: function () {
+            return choices;
+        },
+        init: function () {}
     };
-})();
+})(jQuery);

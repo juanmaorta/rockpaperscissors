@@ -1,14 +1,23 @@
-/*global RockPaperScissors:false */
+/*global RockPaperScissors:false, jQuery:false */
 
 (function ($, rps) {
     'use strict';
 
-    var choices, randomChoice, send, $info,
-    user1Score = 0, user2Score = 0, updateScores;
+    var choices, $info,
+        user1Score = 0, user2Score = 0,
+        updateScores, randomChoice, send, reset, resetInfo;
 
     updateScores = function () {
         $('#userScore').text(user1Score);
         $('#robotScore').text(user2Score);
+    };
+
+    reset = function () {
+        user1Score = 0;
+        user2Score = 0;
+
+        updateScores();
+        resetInfo();
     };
 
     randomChoice = function () {
@@ -18,15 +27,20 @@
         return null;
     };
 
-    send = function () {
-        var choice = $('#myChoice').val(),
-            winner;
-
+    resetInfo = function () {
         $info
+            .text('')
             .removeClass('alert-danger')
             .removeClass('alert-info')
             .removeClass('alert-success')
             .removeClass('alert-warning');
+    };
+
+    send = function () {
+        var choice = $('#myChoice').val(),
+            winner;
+
+        resetInfo();
 
         if (choice !== '') {
             try {
@@ -44,6 +58,11 @@
 
         $('#fForm').on('submit', function (e) {
             send();
+            e.preventDefault();
+        });
+        $('#resetScore').on('click', function (e) {
+            reset();
+
             e.preventDefault();
         });
     })

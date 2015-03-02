@@ -6,7 +6,7 @@ module.exports = function(grunt) {
   var config = {
     app: 'app',
     dist: 'dist',
-    specs: 'test/spec'
+    test: 'testt'
   };
 
   // Project configuration.
@@ -55,7 +55,7 @@ module.exports = function(grunt) {
       all: [
         'Gruntfile.js',
         '<%= config.app %>/scripts/{,*/}*.js',
-        '<%= config.specs %>/{,*/}*.js'
+        '<%= config.test %>/{,*/}*.js'
       ]
     },
 
@@ -70,10 +70,37 @@ module.exports = function(grunt) {
             files: {
                 src: [
                   '<%= config.app %>/scripts/{,*/}*.js',
-                  '<%= config.specs %>/{,*/}*.js'
+                  '<%= config.test %>/{,*/}*.js'
                 ]
             }
         }
+    },
+
+    protractor: {
+      options: {
+          // Location of your protractor config file
+          configFile: 'test/protractor-conf.js',
+
+          // Do you want the output to use fun colors?
+          noColor: false,
+
+          // Set to true if you would like to use the Protractor command line debugging tool
+          // debug: true,
+
+          // Additional arguments that are passed to the webdriver command
+          args: { }
+      },
+      e2e: {
+          options: {
+              // Stops Grunt process if a test fails
+              keepAlive: false
+          }
+      },
+      continuous: {
+          options: {
+              keepAlive: true
+          }
+      }
     },
 
     connect: {
@@ -116,7 +143,8 @@ module.exports = function(grunt) {
   });
 
   // Default task(s).
+  grunt.registerTask('test', ['karma', 'protractor:continuous']);
   grunt.registerTask('default', ['serve']);
-  grunt.registerTask('validate', ['jscs', 'jshint', 'karma']);
+  grunt.registerTask('validate', ['jscs', 'jshint']);
 
 };

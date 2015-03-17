@@ -22,7 +22,7 @@
             expect(result).toEqual(1);
         });
 
-        it('Scissors loose agains rock', function () {
+        it('Scissors loses agains rock', function () {
             var result = rps.whoWins('scissors', 'rock');
             expect(result).toEqual(2);
         });
@@ -32,7 +32,7 @@
             expect(result).toEqual(1);
         });
 
-        it('Rock looses agains paper', function () {
+        it('Rock loses agains paper', function () {
             var result = rps.whoWins('rock', 'paper');
             expect(result).toEqual(2);
         });
@@ -42,7 +42,7 @@
             expect(result).toEqual(1);
         });
 
-        it('Paper looses against scissors', function () {
+        it('Paper loses against scissors', function () {
             var result = rps.whoWins('paper', 'scissors');
             expect(result).toEqual(2);
         });

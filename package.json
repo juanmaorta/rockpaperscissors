@@ -28,7 +28,6 @@
     "phantomjs": "~1.9.15"
   },
   "scripts": {
-    "postinstall": "bower cache clean && bower install",
-    "postinstall": "./node_modules/grunt-protractor-runner/node_modules/.bin/webdriver-manager update"
+    "postinstall": "./post_install.sh"
   }
 }

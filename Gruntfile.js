@@ -47,6 +47,16 @@ module.exports = function(grunt) {
       }
     },
 
+    wiredep: {
+      task: {
+        // Point to the files that should be updated when
+        // you run `grunt wiredep`
+        src: [
+          '<%= config.test %>/*.html'
+        ]
+      }
+    },
+
     jshint: {
       options: {
         jshintrc: '.jshintrc',
@@ -144,7 +154,7 @@ module.exports = function(grunt) {
 
   // Default task(s).
   grunt.registerTask('test', ['karma', 'protractor:continuous']);
-  grunt.registerTask('default', ['serve']);
+  grunt.registerTask('default', ['wiredep', 'serve']);
   grunt.registerTask('validate', ['jscs', 'jshint']);
 
 };

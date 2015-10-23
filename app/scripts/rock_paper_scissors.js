@@ -105,6 +105,7 @@ RockPaperScissors = (function ($) {
         whoWins: _whoWins,
         validate: _validate,
         getChoices: function () {
+
             return choices;
         },
         init: function () {}

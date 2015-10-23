@@ -15,13 +15,15 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-        'app/scripts/*.js',
+        // load the files in order
+        'app/scripts/rock_paper_scissors.js',
+        'app/scripts/main.js',
         'test/unit/*.spec.js'
     ],
 
     // list of files to exclude
     exclude: [
-        'app/scripts/main.js'
+        // 'app/scripts/main.js'
     ],
 
 
@@ -57,7 +59,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome', 'PhantomJS'],
+    browsers: ['PhantomJS'],
 
 
     // Continuous Integration mode

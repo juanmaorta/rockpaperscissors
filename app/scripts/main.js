@@ -45,7 +45,7 @@
         if (choice !== '') {
             try {
                 rps.validate(choice);
-                winner = rps.whoWins(choice, randomChoice());
+                rps.whoWins(choice, randomChoice());
             } catch (e) {
                 $info.addClass('alert-danger').text(e);
             }
@@ -62,22 +62,27 @@
         });
         $('#resetScore').on('click', function (e) {
             reset();
-
             e.preventDefault();
         });
     })
-    .on('score:draw', function () {
-        $info.text('draw').addClass('alert-info');
-    })
-    .on('score:user1', function () {
-        $info.text('you win!').addClass('alert-warning');
-        user1Score++;
-        updateScores();
-    })
-    .on('score:user2', function () {
-        $info.text('I WIN!!!!').addClass('alert-success');
-        user2Score++;
-        updateScores();
-    });
+        .on('score:draw', function () {
+            if ($info) {
+                $info.text('draw').addClass('alert-info');
+            }
+        })
+        .on('score:user1', function () {
+            if ($info) {
+                $info.text('you win!').addClass('alert-warning');
+            }
+            user1Score++;
+            updateScores();
+        })
+        .on('score:user2', function () {
+            if ($info) {
+                $info.text('I WIN!!!!').addClass('alert-success');
+            }
+            user2Score++;
+            updateScores();
+        });
 
 })(jQuery, RockPaperScissors);
